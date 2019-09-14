@@ -5,9 +5,11 @@
     style="@style/Theme.AppCompat.Light.NoActionBar"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    android:orientation="vertical"
+    tools:context=".view.MainActivity">
 
     <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -20,13 +22,10 @@
             android:textSize="20sp" />
     </androidx.appcompat.widget.Toolbar>
 
-
-    <view
-        android:id="@+id/rc_main"
-        class="androidx.appcompat.app.AlertController$RecycleListView"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"/>
 
-    </view>
 
 </FrameLayout>

@@ -14,6 +14,7 @@
         android:layout_marginBottom="40dp">
 
         <ImageView
+            android:id="@+id/image"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:src="#1B8FEC" />
@@ -28,7 +29,7 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/item_name"
+            android:id="@+id/author"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="mbinary" />
@@ -39,9 +40,7 @@
             android:layout_height="wrap_content"
             android:text="GitHubTrending"
             android:textColor="#000"
-            android:textSize="15sp"
-
-            />
+            android:textSize="15sp" />
 
         <TextView
             android:id="@+id/item_description"
