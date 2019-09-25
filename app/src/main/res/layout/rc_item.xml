@@ -83,7 +83,7 @@
                 <ImageView
                     android:layout_width="20dp"
                     android:layout_height="match_parent"
-                    android:src="@drawable/star-yellow-16" />
+                    android:src="@drawable/star_yellow_16" />
 
                 <TextView
                     android:id="@+id/start"
@@ -101,7 +101,7 @@
                 <ImageView
                     android:layout_width="20dp"
                     android:layout_height="match_parent"
-                    android:src="@drawable/fork-black-16" />
+                    android:src="@drawable/fork_black_16" />
 
                 <TextView
                     android:id="@+id/fork"

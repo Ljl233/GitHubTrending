@@ -21,15 +21,15 @@ public class MainActivity extends AppCompatActivity implements TrendingContract.
     public Toolbar toolbar;
     public RecyclerView recyclerView;
     public List<Bean> beans;
-    TrendingPresenter mPresenter;
+    TrendingPresenter mPresenter = new TrendingPresenter();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        toolbar = findViewById(R.id.toolbar);
-        //   setSupportActionBar(toolbar);
+        // toolbar = findViewById(R.id.toolbar);
+        //  setSupportActionBar(toolbar);
 
         recyclerView = findViewById(R.id.recyclerview);
         initRecyclerView();
@@ -39,7 +39,8 @@ public class MainActivity extends AppCompatActivity implements TrendingContract.
     void initRecyclerView() {
         LinearLayoutManager manager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(manager);
-
+        beans = mPresenter.getData();
+        showItem(beans);
 
     }
 
