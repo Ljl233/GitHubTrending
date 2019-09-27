@@ -26,6 +26,8 @@ public interface TrendingContract {
         List<Bean> getData();
 
         void request();
+
+        void unFold(int position);
     }
 
 }

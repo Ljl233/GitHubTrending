@@ -1,10 +1,12 @@
 package com.example.githubtrending.view;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toolbar;
 
 import com.example.githubtrending.TrendingContract;
@@ -14,6 +16,8 @@ import com.example.githubtrending.model.Bean;
 import com.example.githubtrending.presenter.TrendingPresenter;
 
 import java.util.List;
+
+import static androidx.core.util.Preconditions.checkNotNull;
 
 public class MainActivity extends AppCompatActivity implements TrendingContract.View {
 
@@ -46,7 +50,8 @@ public class MainActivity extends AppCompatActivity implements TrendingContract.
 
 
     @Override
-    public void showItem(List<Bean> beans) {
+    public void showItem(@NonNull List<Bean> beans) {
+        Log.e("MainActivity--------->", beans.get(1).getAuthor());
         MyAdapter myAdapter = new MyAdapter(MainActivity.this, beans);
         recyclerView.setAdapter(myAdapter);
     }
@@ -73,6 +78,20 @@ public class MainActivity extends AppCompatActivity implements TrendingContract.
 
     @Override
     public void showError() {
+
+    }
+
+
+    ItemListener mListener = new ItemListener() {
+        @Override
+        public void onItemClick() {
+            int position = 0;
+            mPresenter.unFold(position);
+        }
+    };
+
+    private interface ItemListener {
+        void onItemClick();
 
     }
 }

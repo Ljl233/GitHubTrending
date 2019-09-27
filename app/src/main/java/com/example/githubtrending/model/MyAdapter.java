@@ -32,15 +32,15 @@ public class MyAdapter extends RecyclerView.Adapter {
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_fold, parent, false);
-        return new ViewHolder1(v);
+        return new ViewHolderFold(v);
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        ViewHolder1 vh = (ViewHolder1) holder;
+        ViewHolderFold vh = (ViewHolderFold) holder;
         vh.tv_author.setText(beans.get(position).getAuthor());
         vh.image.setImageBitmap(BitmapUtil.getBitmap(beans.get(position).getAvatar()));
-
+        vh.name_project.setText(beans.get(position).getName());
     }
 
     @Override
@@ -49,25 +49,32 @@ public class MyAdapter extends RecyclerView.Adapter {
     }
 
 
-    class ViewHolder1 extends RecyclerView.ViewHolder {
+    class ViewHolderFold extends RecyclerView.ViewHolder {
         ImageView image;
         TextView tv_author;
+        TextView name_project;
 
-        public ViewHolder1(@NonNull View itemView) {
+        public ViewHolderFold(@NonNull View itemView) {
             super(itemView);
             image = itemView.findViewById(R.id.image);
             tv_author = itemView.findViewById(R.id.author);
+            name_project = itemView.findViewById(R.id.item_project_name);
         }
     }
 
-    class ViewHolder2 extends RecyclerView.ViewHolder {
+    class ViewHolderUnfold extends RecyclerView.ViewHolder {
         ImageView image;
         TextView tv_author;
+        TextView description, language, star, fork;
 
-        public ViewHolder2(@NonNull View itemView) {
+        public ViewHolderUnfold(@NonNull View itemView) {
             super(itemView);
             image = itemView.findViewById(R.id.image);
             tv_author = itemView.findViewById(R.id.author);
+            description = itemView.findViewById(R.id.item_description);
+            language = itemView.findViewById(R.id.language);
+            star = itemView.findViewById(R.id.star);
+            fork = itemView.findViewById(R.id.fork);
 
 
         }
