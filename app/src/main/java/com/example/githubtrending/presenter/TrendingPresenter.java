@@ -21,10 +21,15 @@ public class TrendingPresenter implements TrendingContract.Presenter {
     @Override
     public List<Bean> getData() {
         beans = model.request();
-        Log.e("Presenter--------->", model.toString());
-        Log.e("Presenter--------->", beans.get(1).getAuthor());
+//        Log.e("Presenter--------->", model.toString());
+//        Log.e("Presenter--------->", beans.get(1).getAuthor());
 
         return beans;
+    }
+
+    @Override
+    public void refresh() {
+
     }
 
     @Override

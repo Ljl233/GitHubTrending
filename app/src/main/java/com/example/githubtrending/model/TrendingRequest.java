@@ -15,21 +15,18 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class TrendingRequest implements IModel {
 
-    private static TrendingRequest INSTANCE = null;
+    private static TrendingRequest INSTANCE = new TrendingRequest();
 
-    public TrendingRequest() {
+    private TrendingRequest() {
 
     }
 
     public static TrendingRequest getINSTANCE() {
-        if (INSTANCE != null) {
-            INSTANCE = new TrendingRequest();
-        }
         return INSTANCE;
     }
 
 
-    public List<Bean> beans = new ArrayList<>();
+    List<Bean> beans = new ArrayList<>(10);
     private Retrofit retrofit = new Retrofit.Builder()
             .baseUrl("https://github-trending-api.now.sh/")
             .addConverterFactory(GsonConverterFactory.create())
@@ -38,14 +35,14 @@ public class TrendingRequest implements IModel {
 
     private Call<List<Bean>> serviceCall = service.getCall();
 
-    public List<Bean> request() {
+    void requestFirst() {
         Log.e("onResponse--------->", "msg");
 
         serviceCall.enqueue(new Callback<List<Bean>>() {
 
             @Override
             public void onResponse(Call<List<Bean>> call, Response<List<Bean>> response) {
-                Log.e("onResponse--------->", beans.get(1).getAuthor());
+                Log.e("onResponse--------->", "i am successed");
 
                 beans = response.body();
             }
@@ -56,9 +53,15 @@ public class TrendingRequest implements IModel {
 
             }
         });
-        Log.e("onResponse--------->", beans.get(1).getAuthor());
+        Log.e("onResponse--------->", String.valueOf(beans.size()));
 
+
+    }
+
+    public List<Bean> request() {
+        if (beans!=null)
         return beans;
+        else requestFirst();
     }
 
 }
