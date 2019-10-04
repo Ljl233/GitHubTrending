@@ -20,7 +20,7 @@ public class TrendingPresenter implements TrendingContract.Presenter {
 
     @Override
     public List<Bean> getData() {
-        beans = model.request();
+
 //        Log.e("Presenter--------->", model.toString());
 //        Log.e("Presenter--------->", beans.get(1).getAuthor());
 
@@ -34,6 +34,12 @@ public class TrendingPresenter implements TrendingContract.Presenter {
 
     @Override
     public void request() {
+        model.request(new PCallback() {
+            @Override
+            public void requestFinish(List<Bean> beans) {
+                mView.showItem(beans);
+            }
+        });
     }
 
     @Override
@@ -43,3 +49,4 @@ public class TrendingPresenter implements TrendingContract.Presenter {
 
 
 }
+

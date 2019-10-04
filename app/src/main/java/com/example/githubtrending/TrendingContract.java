@@ -1,6 +1,7 @@
 package com.example.githubtrending;
 
 import com.example.githubtrending.model.Bean;
+import com.example.githubtrending.presenter.PCallback;
 
 import java.util.List;
 

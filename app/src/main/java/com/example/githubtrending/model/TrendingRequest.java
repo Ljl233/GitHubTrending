@@ -2,6 +2,7 @@ package com.example.githubtrending.model;
 
 import android.util.Log;
 
+import com.example.githubtrending.presenter.PCallback;
 import com.example.githubtrending.presenter.TrendingPresenter;
 
 import java.util.ArrayList;
@@ -35,33 +36,21 @@ public class TrendingRequest implements IModel {
 
     private Call<List<Bean>> serviceCall = service.getCall();
 
-    void requestFirst() {
-        Log.e("onResponse--------->", "msg");
+    public void request(PCallback pCallback) {
 
         serviceCall.enqueue(new Callback<List<Bean>>() {
 
             @Override
             public void onResponse(Call<List<Bean>> call, Response<List<Bean>> response) {
-                Log.e("onResponse--------->", "i am successed");
+                pCallback.requestFinish(response.body());
 
-                beans = response.body();
             }
-
             @Override
             public void onFailure(Call<List<Bean>> call, Throwable t) {
                 Log.e("onResponse--------->", t.getMessage());
 
             }
         });
-        Log.e("onResponse--------->", String.valueOf(beans.size()));
-
-
-    }
-
-    public List<Bean> request() {
-        if (beans!=null)
-        return beans;
-        else requestFirst();
     }
 
 }

@@ -1,7 +1,9 @@
 package com.example.githubtrending.model;
 
+import com.example.githubtrending.presenter.PCallback;
+
 import java.util.List;
 
 public interface IModel {
-     List<Bean> request();
+    void request(PCallback pCallback);
 }
