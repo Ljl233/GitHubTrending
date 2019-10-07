@@ -2,6 +2,7 @@ package com.example.githubtrending;
 
 import com.example.githubtrending.model.Bean;
 import com.example.githubtrending.presenter.PCallback;
+import com.example.githubtrending.presenter.TrendingPresenter;
 
 import java.util.List;
 
@@ -9,6 +10,8 @@ public interface TrendingContract {
 
     interface View {
         void showItem(List<Bean> beans);
+
+        void setPresenter(TrendingPresenter mp);
 
         void showAddItem();
 

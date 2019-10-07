@@ -1,22 +1,25 @@
 package com.example.githubtrending.presenter;
 
-import android.util.Log;
-
 import com.example.githubtrending.TrendingContract;
 import com.example.githubtrending.model.Bean;
 import com.example.githubtrending.model.IModel;
 import com.example.githubtrending.model.TrendingRequest;
+import com.example.githubtrending.view.TrendingFragment;
 
 import java.util.List;
-
-import static androidx.core.util.Preconditions.checkNotNull;
 
 
 public class TrendingPresenter implements TrendingContract.Presenter {
 
-    TrendingContract.View mView;
+    private TrendingContract.View mView;
     private IModel model = TrendingRequest.getINSTANCE();
-    List<Bean> beans;
+    private List<Bean> beans;
+
+    //构造器
+    public TrendingPresenter(TrendingContract.View view) {
+        mView = view;
+        mView.setPresenter(this);
+    }
 
     @Override
     public List<Bean> getData() {

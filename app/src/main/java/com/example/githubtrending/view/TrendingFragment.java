@@ -20,14 +20,16 @@ import com.example.githubtrending.presenter.TrendingPresenter;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 public class TrendingFragment extends Fragment implements TrendingContract.View {
 
     RecyclerView recyclerView;
     MyAdapter myAdapter;
     List<Bean> beans = new ArrayList<>(5);
-    TrendingContract.Presenter mPresenter = new TrendingPresenter();
+    private TrendingContract.Presenter mPresenter;
 
-    static TrendingFragment INSTANCE = new TrendingFragment();
+    static TrendingFragment INSTANCE;
 
     private TrendingFragment() {
     }
@@ -46,18 +48,26 @@ public class TrendingFragment extends Fragment implements TrendingContract.View 
         LinearLayoutManager manager = new LinearLayoutManager(this.getContext());
         recyclerView.setLayoutManager(manager);
         recyclerView.setAdapter(myAdapter);
-        mPresenter.refresh();
+        mPresenter.request();
         return root;
     }
 
-    static TrendingFragment getINSTANCE() {
-        return INSTANCE;
-    }
+//    public static TrendingFragment getINSTANCE() {
+//        if (INSTANCE == null) {
+//            INSTANCE =
+//        }
+//        return INSTANCE;
+//    }
 
     @Override
     public void showItem(List<Bean> beans) {
         this.beans = beans;
         myAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void setPresenter(TrendingPresenter mp) {
+        mPresenter = checkNotNull(mp);
     }
 
     @Override
