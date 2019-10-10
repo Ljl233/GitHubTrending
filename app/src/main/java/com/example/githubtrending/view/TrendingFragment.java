@@ -1,6 +1,7 @@
 package com.example.githubtrending.view;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,7 +38,7 @@ public class TrendingFragment extends Fragment implements TrendingContract.View 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        myAdapter = new MyAdapter(beans);
+
     }
 
     @Nullable
@@ -47,22 +48,24 @@ public class TrendingFragment extends Fragment implements TrendingContract.View 
         recyclerView = root.findViewById(R.id.recyclerview);
         LinearLayoutManager manager = new LinearLayoutManager(this.getContext());
         recyclerView.setLayoutManager(manager);
-        recyclerView.setAdapter(myAdapter);
         mPresenter.request();
+
         return root;
     }
 
-//    public static TrendingFragment getINSTANCE() {
-//        if (INSTANCE == null) {
-//            INSTANCE =
-//        }
-//        return INSTANCE;
-//    }
+    public static TrendingFragment getINSTANCE() {
+        if (INSTANCE == null) {
+            INSTANCE = new TrendingFragment();
+        }
+        return INSTANCE;
+    }
 
     @Override
     public void showItem(List<Bean> beans) {
         this.beans = beans;
-        myAdapter.notifyDataSetChanged();
+        Log.e("Fragment--------->", "I'm gonna to refresh");
+        myAdapter = new MyAdapter(beans);
+        recyclerView.setAdapter(myAdapter);
     }
 
     @Override

@@ -4,6 +4,7 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ValueAnimator;
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,14 +25,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MyAdapter extends RecyclerView.Adapter {
+    private int theLastPosition = 0;
+    private View theLastOnClickItem;
     private Context context;
 
     private static int mHiddenViewMeasuredHeight;
     private List<Bean> beans;
 
 
-    public MyAdapter( List<Bean> bean) {
-      //  this.context = context;
+    public MyAdapter(List<Bean> bean) {
+        //  this.context = context;
         this.beans = bean;
     }
 
@@ -39,7 +42,7 @@ public class MyAdapter extends RecyclerView.Adapter {
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         mHiddenViewMeasuredHeight = (int) parent.getContext().getResources().getDimension(R.dimen.dp_40);
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.rc_item, parent);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.rc_item, parent, false);
         return new ViewHolderFold(v);
     }
 
@@ -51,13 +54,23 @@ public class MyAdapter extends RecyclerView.Adapter {
         vh.name_project.setText(beans.get(position).getName());
         vh.item_description.setText(beans.get(position).getDescription());
         vh.language.setText(beans.get(position).getLanguage());
-        vh.language.setTextColor(Integer.parseInt(beans.get(position).getLanguageColor()));
-        vh.fork.setText(beans.get(position).getForks());
-        vh.star.setText(beans.get(position).getStars());
+        vh.language.setTextColor(Color.parseColor(beans.get(position).getLanguageColor()));
+        vh.fork.setText(String.valueOf(beans.get(position).getForks()));
+        vh.star.setText(String.valueOf(beans.get(position).getStars()));
         vh.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                vh.foldLayout.setVisibility(View.VISIBLE);
+
+                if (theLastOnClickItem != null && theLastOnClickItem.getVisibility() == View.VISIBLE) {
+                    animClose(theLastOnClickItem);
+                }
+                if (vh.foldLayout.getVisibility() == View.GONE) {
+                    animOpen(vh.foldLayout);
+
+                } else {
+                    animClose(vh.foldLayout);
+                }
+                theLastOnClickItem = vh.foldLayout;
             }
         });
     }

@@ -1,5 +1,7 @@
 package com.example.githubtrending.presenter;
 
+import android.util.Log;
+
 import com.example.githubtrending.TrendingContract;
 import com.example.githubtrending.model.Bean;
 import com.example.githubtrending.model.IModel;
@@ -40,6 +42,7 @@ public class TrendingPresenter implements TrendingContract.Presenter {
         model.request(new PCallback() {
             @Override
             public void requestFinish(List<Bean> beans) {
+                Log.e("oPresenter--------->", "I'm going to show item");
                 mView.showItem(beans);
             }
         });

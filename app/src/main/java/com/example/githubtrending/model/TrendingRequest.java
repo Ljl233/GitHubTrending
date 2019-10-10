@@ -42,6 +42,7 @@ public class TrendingRequest implements IModel {
 
             @Override
             public void onResponse(Call<List<Bean>> call, Response<List<Bean>> response) {
+                Log.e("onResponse--------->", "success to request");
                 pCallback.requestFinish(response.body());
 
             }
