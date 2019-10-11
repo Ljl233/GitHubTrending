@@ -15,6 +15,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class TrendingRequest implements IModel {
+    private boolean firstCalled = true;
 
     private static TrendingRequest INSTANCE = new TrendingRequest();
 
@@ -37,21 +38,44 @@ public class TrendingRequest implements IModel {
     private Call<List<Bean>> serviceCall = service.getCall();
 
     public void request(PCallback pCallback) {
+        if (firstCalled) {
+            Log.e("TrendingRequest--->","the first call");
+            serviceCall.enqueue(new Callback<List<Bean>>() {
 
-        serviceCall.enqueue(new Callback<List<Bean>>() {
+                @Override
+                public void onResponse(Call<List<Bean>> call, Response<List<Bean>> response) {
+                    Log.e("onResponse--------->", "success to request");
+                    pCallback.requestFinish(response.body());
 
-            @Override
-            public void onResponse(Call<List<Bean>> call, Response<List<Bean>> response) {
-                Log.e("onResponse--------->", "success to request");
-                pCallback.requestFinish(response.body());
+                }
 
-            }
-            @Override
-            public void onFailure(Call<List<Bean>> call, Throwable t) {
-                Log.e("onResponse--------->", t.getMessage());
+                @Override
+                public void onFailure(Call<List<Bean>> call, Throwable t) {
+                    Log.e("onResponse--------->", t.getMessage());
 
-            }
-        });
+                }
+            });
+            firstCalled = false;
+        } else {
+            Log.e("TrendingRequest--->","Not the first call");
+
+            Call<List<Bean>> newCall = serviceCall.clone();
+            newCall.enqueue(new Callback<List<Bean>>() {
+
+                @Override
+                public void onResponse(Call<List<Bean>> call, Response<List<Bean>> response) {
+                    Log.e("onResponse--------->", "success to request");
+                    pCallback.requestFinish(response.body());
+
+                }
+
+                @Override
+                public void onFailure(Call<List<Bean>> call, Throwable t) {
+                    Log.e("onResponse--------->", t.getMessage());
+
+                }
+            });
+        }
     }
 
 }

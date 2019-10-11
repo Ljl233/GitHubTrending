@@ -5,6 +5,7 @@ import android.animation.AnimatorListenerAdapter;
 import android.animation.ValueAnimator;
 import android.content.Context;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,7 +55,9 @@ public class MyAdapter extends RecyclerView.Adapter {
         vh.name_project.setText(beans.get(position).getName());
         vh.item_description.setText(beans.get(position).getDescription());
         vh.language.setText(beans.get(position).getLanguage());
-        vh.language.setTextColor(Color.parseColor(beans.get(position).getLanguageColor()));
+        if (beans.get(position).getLanguageColor() != null) {
+            vh.language.setTextColor(Color.parseColor(beans.get(position).getLanguageColor()));
+        }
         vh.fork.setText(String.valueOf(beans.get(position).getForks()));
         vh.star.setText(String.valueOf(beans.get(position).getStars()));
         vh.itemView.setOnClickListener(new View.OnClickListener() {

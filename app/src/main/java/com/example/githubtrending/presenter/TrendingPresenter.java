@@ -38,6 +38,18 @@ public class TrendingPresenter implements TrendingContract.Presenter {
     }
 
     @Override
+    public void loadTasks(boolean forceUpdate) {
+        loadTasks(forceUpdate, true);
+    }
+
+    private void loadTasks(boolean forceUpdate, boolean showLoadingUI) {
+
+        mView.setLoadingIndicator(true);
+
+        request();
+    }
+
+    @Override
     public void request() {
         model.request(new PCallback() {
             @Override

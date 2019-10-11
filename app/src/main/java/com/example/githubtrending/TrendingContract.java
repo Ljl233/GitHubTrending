@@ -13,6 +13,8 @@ public interface TrendingContract {
 
         void setPresenter(TrendingPresenter mp);
 
+        void setLoadingIndicator(boolean action);
+
         void showAddItem();
 
         void showItemFold();
@@ -31,6 +33,8 @@ public interface TrendingContract {
 
 
         void refresh();
+
+        void loadTasks(boolean forceUpdate);
 
         void request();
 
