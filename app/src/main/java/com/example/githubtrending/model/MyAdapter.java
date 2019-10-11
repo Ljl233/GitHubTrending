@@ -17,6 +17,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.githubtrending.R;
 import com.example.githubtrending.model.Bean;
 import com.example.githubtrending.util.BitmapUtil;
@@ -42,6 +43,7 @@ public class MyAdapter extends RecyclerView.Adapter {
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        context=parent.getContext();
         mHiddenViewMeasuredHeight = (int) parent.getContext().getResources().getDimension(R.dimen.dp_40);
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.rc_item, parent, false);
         return new ViewHolderFold(v);
@@ -51,7 +53,8 @@ public class MyAdapter extends RecyclerView.Adapter {
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         ViewHolderFold vh = (ViewHolderFold) holder;
         vh.tv_author.setText(beans.get(position).getAuthor());
-        vh.image.setImageBitmap(BitmapUtil.getBitmap(beans.get(position).getAvatar()));
+        //使用Glide 加载图片
+        Glide.with(context).load(beans.get(position).getAvatar()).into(vh.image);
         vh.name_project.setText(beans.get(position).getName());
         vh.item_description.setText(beans.get(position).getDescription());
         vh.language.setText(beans.get(position).getLanguage());

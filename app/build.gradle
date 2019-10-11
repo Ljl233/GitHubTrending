@@ -38,4 +38,7 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-gson:2.6.1'
 
     implementation 'com.google.guava:guava:28.1-jre'
+    //glide 图片加载框架
+    implementation 'com.github.bumptech.glide:glide:4.10.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.10.0'
 }
